@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Bloc. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "WineViewController.h"
 
-@interface WhiskeyViewController : ViewController
+@interface WhiskeyViewController : WineViewController
 
 @end

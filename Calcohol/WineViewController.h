@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface WineViewController : UIViewController
 @property (weak, nonatomic) UITextField *beerPercentTextField;
 @property (weak, nonatomic) UILabel *resultLabel;
 @property (weak, nonatomic) UISlider *beerCountSlider;
+@property (weak, nonatomic) UILabel *sliderValueLabel;
 
 - (void)buttonPressed:(UIButton *)sender;
+- (IBAction)updateQuantityLabel;
 
 @end
 
