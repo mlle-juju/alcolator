@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "WineViewController.h"
-#import "BLCMainMenuViewController.h"
+#import "WhiskeyViewController.h"
 
 @interface AppDelegate ()
 
@@ -20,10 +20,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] ;
     // Override point for customization after application launch.
+    WineViewController *wineVC = [[WineViewController alloc] init];
+    WhiskeyViewController *whiskeyVC = [[WhiskeyViewController alloc] init];
+    UITabBarController *tabBarVC = [[UITabBarController alloc] init];
+    tabBarVC.viewControllers = @[wineVC, whiskeyVC];
     
-    BLCMainMenuViewController *mainMenuViewController = [[BLCMainMenuViewController alloc] init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mainMenuViewController];
-    self.window.rootViewController = navigationController;
+    self.window.rootViewController = tabBarVC;
+
     [self.window makeKeyAndVisible];
     
     return YES;

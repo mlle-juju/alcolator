@@ -16,11 +16,21 @@
 @implementation WhiskeyViewController
 // DELETE PRE-WRITTEN METHODS: initiWithNibName:bundle:, viewDidLoad, didReceiveMemoryWarning…
 
+- (instancetype) init {
+    self = [super init];
+    if (self) {
+        self.title = NSLocalizedString(@"Whiskey", nil);
+    }
+    return self;
+}
+
 - (void) viewDidLoad {
     [super viewDidLoad];
-    self.title = NSLocalizedString(@"Whiskey", @"whiskey");
+    self.view.backgroundColor = [UIColor colorWithRed:0.992 green:0.992 blue:0.588 alpha:1]; /*#fdfd96*/
     
 }
+
+
 
 - (void)buttonPressed:(UIButton *)sender;
 {
@@ -64,8 +74,9 @@
 - (void)sliderValueDidChange:(UISlider *)sender {
     [self updateQuantityLabel];
     int numberOfUnits = self.beerCountSlider.value;
+    [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", (int) sender.value]];
 
-    self.title = [NSString stringWithFormat:NSLocalizedString(@"Whiskey (%i shots)", nil), numberOfUnits];
+    //self.title = [NSString stringWithFormat:NSLocalizedString(@"Whiskey (%i shots)", nil), numberOfUnits];
 
     
 }

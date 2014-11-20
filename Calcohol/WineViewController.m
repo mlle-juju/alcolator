@@ -22,7 +22,12 @@
     // Do any additional setup after loading the view, typically from a nib.
     // Set our primary view's background color to light grey.
     // pretty pink color: self.view.backgroundColor = [UIColor colorWithRed:1 green:0.55 blue:0.9 alpha:1];
-    self.view.backgroundColor = [UIColor colorWithRed:0.55 green:0.7 blue:1 alpha:1];
+    //self.view.backgroundColor = [UIColor colorWithRed:0.55 green:0.7 blue:1 alpha:1];
+   
+    //on 11.13.14 changed the color per Bloc checkpoint. The light blue color I prefer is above.
+    self.view.backgroundColor = [UIColor colorWithRed:0.741 green:0.925 blue:0.714 alpha:1]; /*#bdecb6*/
+
+    
     
     // Tells the text field that `self`, this instance of `BLCViewController` should be treated as the text field's delegate
     self.beerPercentTextField.delegate = self;
@@ -59,10 +64,11 @@
     self.beerPercentTextField.font = secondFont;
     
     //gave the slider value label a font
-    self.sliderValueLabel.font = secondFont;
+    //self.sliderValueLabel.font = secondFont;
 
 //    [[UILabel appearance] setFont:newFont];
-    self.title = NSLocalizedString(@"Wine", @"wine");
+
+    
 
 
 }
@@ -86,6 +92,7 @@
 - (void)sliderValueDidChange:(UISlider *)sender {
     NSLog(@"Slider value changed to %f", sender.value);
     [self.beerPercentTextField resignFirstResponder];
+    [self.tabBarItem setBadgeValue:[NSString stringWithFormat:@"%d", (int) sender.value]];
     
     [self updateQuantityLabel];
 }
@@ -96,11 +103,11 @@
     
     //my attempt to make the label say #of beers the slider represents is below
     
-    NSString *numberOfBeersLabelText = [NSString stringWithFormat:NSLocalizedString(@"%.1f", nil), numberOfUnits];
-    NSString *titleText = [NSString stringWithFormat:NSLocalizedString(@"Wine (%.1f glasses)", nil), numberOfUnits];
-    self.sliderValueLabel.text = numberOfBeersLabelText;
-    self.title = titleText;
-    [self buttonPressed:self.calculateButton];
+   // NSString *numberOfBeersLabelText = [NSString stringWithFormat:NSLocalizedString(@"%.1f", nil), numberOfUnits];
+    //NSString *titleText = [NSString stringWithFormat:NSLocalizedString(@"Wine (%.1f glasses)", nil), numberOfUnits];
+    //self.sliderValueLabel.text = numberOfBeersLabelText;
+    //self.title = titleText;
+    //[self buttonPressed:self.calculateButton];
 
 }
 
@@ -150,10 +157,24 @@
     
     // Nov 6 I added the sliderValueText and called the sliderValueLabel below.
     
-    NSString *sliderValueText = [NSString stringWithFormat:@"%g", _beerCountSlider.value];
-    self.sliderValueLabel.text = sliderValueText;
+    //NSString *sliderValueText = [NSString stringWithFormat:@"%g", _beerCountSlider.value];
+    //self.sliderValueLabel.text = sliderValueText;
     
     
+}
+
+- (instancetype) init {
+    self = [super init];
+    
+    if (self) {
+        self.title = NSLocalizedString(@"Wine", @"wine");
+        // Since we don't have icons, let's move the title to the middle of the tab bar
+        [self.tabBarItem setTitlePositionAdjustment:UIOffsetMake(0, -18)];
+
+    
+    }
+    
+    return self;
 }
 
 
@@ -187,7 +208,7 @@
     self.beerPercentTextField = textField;
     self.beerCountSlider = slider;
     self.resultLabel = label;
-    self.sliderValueLabel = sliderLabel;
+    //self.sliderValueLabel = sliderLabel;
     self.calculateButton = button;
     self.hideKeyboardTapGestureRecognizer = tap;
 }
@@ -206,10 +227,11 @@
     CGFloat bottomOfTextField = CGRectGetMaxY(self.beerPercentTextField.frame);
     self.beerPercentTextField.textAlignment = UITextAlignmentCenter;
     
+    //11.6.14 this is the slider that Paul helped me create
     self.beerCountSlider.frame = CGRectMake(padding, bottomOfTextField + padding, itemWidth, itemHeight);
     
     CGFloat bottomOfSlider = CGRectGetMaxY(self.beerCountSlider.frame);
-    self.resultLabel.frame = CGRectMake(padding, bottomOfSlider + padding+100, itemWidth, itemHeight * 2);
+    self.resultLabel.frame = CGRectMake(padding, bottomOfSlider + padding+20, itemWidth, itemHeight * 2);
 //    self.resultLabel.text = @"testing";
     self.resultLabel.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
     self.resultLabel.textAlignment = UITextAlignmentCenter;
@@ -219,13 +241,13 @@
  //   [self.resultLabel sizeToFit];
 
     
-    // Nov 6 my attempt to situate the label in a visible spot on the app.
+    /* Nov 6 my attempt to situate the label in a visible spot on the app.
     
     self.sliderValueLabel.frame = CGRectMake(padding, bottomOfSlider + padding, itemWidth/2, itemHeight);
     self.sliderValueLabel.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
     self.sliderValueLabel.textAlignment = UITextAlignmentCenter;
     self.sliderValueLabel.adjustsFontSizeToFitWidth = YES;
-    self.sliderValueLabel.preferredMaxLayoutWidth = 50;
+    self.sliderValueLabel.preferredMaxLayoutWidth = 50; */
     
     
     CGFloat bottomOfLabel = CGRectGetMaxY(self.resultLabel.frame);
